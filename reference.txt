@@ -1,0 +1,20 @@
+How to hook up softpot:
+    https://learn.sparkfun.com/tutorials/softpot-hookup-guide
+
+How to hook up fsr:
+    https://learn.adafruit.com/force-sensitive-resistor-fsr/using-an-fsr
+
+Pull up and pull down resistors:
+    https://playground.arduino.cc/CommonTopics/PullUpDownResistor
+
+MPU-6050 documentation for Arduino:
+    https://playground.arduino.cc/CommonTopics/PullUpDownResistor
+
+    Issue with my GY-521 from amazon:
+        http://forum.arduino.cc/index.php?topic=394691.0
+
+PulseSensor github:
+    https://github.com/WorldFamousElectronics/PulseSensorPlayground
+
+ESP32 Arduino Core Repo (Docs, Installation, lib, examples):
+    https://github.com/espressif/arduino-esp32
