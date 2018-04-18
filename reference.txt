@@ -9,9 +9,12 @@ Pull up and pull down resistors:
 
 MPU-6050 documentation for Arduino:
     https://playground.arduino.cc/CommonTopics/PullUpDownResistor
+    https://maker.pro/education/imu-interfacing-tutorial-get-started-with-arduino-and-the-mpu-6050-sensor
 
     Issue with my GY-521 from amazon:
         http://forum.arduino.cc/index.php?topic=394691.0
+
+        May not be an issue now, my data seems reasonably stable.
 
 PulseSensor github:
     https://github.com/WorldFamousElectronics/PulseSensorPlayground
