@@ -184,14 +184,14 @@ void loop() {
         mpu.dmpGetGravity(&gravity, &q);
         mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
         Serial.print("ypr\t");
-        //Serial.print(ypr[0] * 180/M_PI);
-        Serial.print(map(ypr[0] * 180/M_PI, -180, 180, 0, 127));
+        Serial.print(ypr[0] * 180/M_PI);
+        //Serial.print(map(ypr[0] * 180/M_PI, -180, 180, 0, 127));
         Serial.print("\t");
-        //Serial.print(ypr[1] * 180/M_PI);
-        Serial.print(map(ypr[1] * 180/M_PI, -180, 180, 0, 127));
+        Serial.print(ypr[1] * 180/M_PI);
+        //Serial.print(map(ypr[1] * 180/M_PI, -180, 180, 0, 127));
         Serial.print("\t");
-        //Serial.println(ypr[2] * 180/M_PI);
-        Serial.println(map(ypr[2] * 180/M_PI, -180, 180, 0, 127));
+        Serial.println(ypr[2] * 180/M_PI);
+        //Serial.println(map(ypr[2] * 180/M_PI, -180, 180, 0, 127));
 
         // blink LED to indicate activity
         blinkState = !blinkState;
