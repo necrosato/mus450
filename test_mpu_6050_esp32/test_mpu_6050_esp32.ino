@@ -1,6 +1,7 @@
 
 // I2Cdev and MPU6050 must be installed as libraries, or else the .cpp/.h files
 // for both classes must be in the include path of your project
+#define ESP32MPU
 #include "I2Cdev.h"
 
 #include "MPU6050_6Axis_MotionApps20.h"
