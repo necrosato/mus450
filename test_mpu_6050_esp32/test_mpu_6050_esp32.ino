@@ -24,7 +24,7 @@ MPU6050 mpu;
 #define LED_PIN 13 // (Arduino is 13, Teensy is 11, Teensy++ is 6)
 #endif
 #define INT_PIN 12 // GPIO 12 on ESP32
-// default sda is 21 and sdl is 22 on esp 32
+// default sda is 21 and scl is 22 on esp 32
 bool blinkState = false;
 
 // MPU control/status vars
