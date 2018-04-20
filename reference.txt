@@ -21,3 +21,6 @@ PulseSensor github:
 
 ESP32 Arduino Core Repo (Docs, Installation, lib, examples):
     https://github.com/espressif/arduino-esp32
+
+OSC for Max:
+    https://www.music.mcgill.ca/~gary/306/week9/osc.html
