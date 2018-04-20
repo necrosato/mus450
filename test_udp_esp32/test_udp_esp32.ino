@@ -1,6 +1,6 @@
 /*
  *  This sketch sends random data over UDP on a ESP32 device
- *
+  *
  */
 #include <WiFi.h>
 #include <WiFiUdp.h>
@@ -29,12 +29,23 @@ void setup(){
   connectToWiFi(networkName, networkPswd);
 }
 
+#define OSC_LEN 32
+char *osc_address = "/osc/esp";
+char osc_message[OSC_LEN] = "";
+
 void loop(){
+    int i;
+    for (i = 0; i < OSC_LEN; i++) {
+        osc_message[i] = 0;
+    }
+    strcpy(osc_message, osc_address);
+    i = strlen(osc_message);
+    
   //only send data when connected
   if(connected){
     //Send a packet
     udp.beginPacket(udpAddress,udpPort);
-    udp.printf("1234");
+    udp.printf(osc_message);
     udp.endPacket();
   }
   //Wait for 1 second
