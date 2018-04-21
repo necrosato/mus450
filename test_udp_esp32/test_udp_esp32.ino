@@ -16,8 +16,7 @@ const char * udpAddress = "10.0.0.92";
 const int udpPort = 6666;
 
 //Are we currently connected?
-boolean connected = false;
-
+boolean connected = false; 
 //The udp library class
 WiFiUDP udp;
 
@@ -30,7 +29,9 @@ void setup(){
 }
 
 #define OSC_LEN 32
-char *osc_address = "/osc/esp";
+char *osc_address = "/osc/esp"; //8
+char *osc_type_tag = ",i"; //2
+char *osc_data = "123"; //2
 char osc_message[OSC_LEN] = "";
 
 void loop(){
@@ -39,7 +40,23 @@ void loop(){
         osc_message[i] = 0;
     }
     strcpy(osc_message, osc_address);
-    i = strlen(osc_message);
+    int message_len = strlen(osc_message);
+    message_len += ((message_len%4)+4);
+    strcpy(osc_message+message_len, osc_type_tag);
+    message_len += strlen(osc_type_tag);
+    message_len += ((message_len%4)+4);
+    strcpy(osc_message+message_len, osc_data);
+    message_len += strlen(osc_data);
+    message_len += ((message_len%4)+4);
+    Serial.print("Message length: ");
+    Serial.print(message_len);
+    Serial.print("Message: ");
+    for (i = 0; i < message_len; i++) {
+        Serial.print(osc_message[i]);
+    }
+    Serial.println("");
+    
+    
     
   //only send data when connected
   if(connected){
