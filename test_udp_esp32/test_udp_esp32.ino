@@ -31,14 +31,27 @@ void setup(){
 #define OSC_LEN 32
 char *osc_address = "/osc/esp"; //8
 char *osc_type_tag = ",i"; //2
-char *osc_data = "123"; //2
+char osc_data[4] = ""; //3
 char osc_message[OSC_LEN] = "";
+
+int data_count = 0;
+void build_data() {
+    for (int i = 0; i < 4; i++) {
+        osc_data[i] = 0;
+    }
+    const char *num_str = String(data_count).c_str();
+    for (int i = 0; i < strlen(num_str); i++) {
+        osc_data[i] = num_str[i];
+    }
+    data_count = (data_count + 1) % 127;
+}
 
 void loop(){
     int i;
     for (i = 0; i < OSC_LEN; i++) {
         osc_message[i] = 0;
     }
+    build_data();
     strcpy(osc_message, osc_address);
     int message_len = strlen(osc_message);
     message_len += ((message_len%4)+4);
@@ -62,7 +75,7 @@ void loop(){
   if(connected){
     //Send a packet
     udp.beginPacket(udpAddress,udpPort);
-    udp.write((uint_8 *)osc_message, message_len);
+    udp.write((uint8_t *)osc_message, message_len);
     udp.endPacket();
   }
   //Wait for 1 second
