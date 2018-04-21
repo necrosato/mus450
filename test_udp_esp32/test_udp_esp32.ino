@@ -62,7 +62,7 @@ void loop(){
   if(connected){
     //Send a packet
     udp.beginPacket(udpAddress,udpPort);
-    udp.printf(osc_message);
+    udp.write((uint_8 *)osc_message, message_len);
     udp.endPacket();
   }
   //Wait for 1 second
