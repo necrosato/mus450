@@ -1,7 +1,3 @@
-/*
- *  This sketch sends random data over UDP on a ESP32 device
-  *
- */
 #include <WiFi.h>
 #include <WiFiUdp.h>
 
@@ -29,21 +25,19 @@ void setup(){
 }
 
 #define OSC_LEN 32
-char *osc_address = "/osc/esp"; //8
+char *osc_address = "nsato/esp";
 char *osc_type_tag = ",i"; //2
-char osc_data[4] = ""; //3
 char osc_message[OSC_LEN] = "";
+uint8_t data_count = 0;
 
-int data_count = 0;
-void build_data() {
-    for (int i = 0; i < 4; i++) {
-        osc_data[i] = 0;
-    }
-    const char *num_str = String(data_count).c_str();
-    for (int i = 0; i < strlen(num_str); i++) {
-        osc_data[i] = num_str[i];
-    }
-    data_count = (data_count + 1) % 127;
+int prepare_osc_message(char *mbuf, char *address, char *type_tag) {
+    strncpy(mbuf, address, 16);
+    int message_len = strlen(mbuf);
+    message_len += (4-(message_len%4));
+    strncpy(mbuf+message_len, type_tag, 4);
+    message_len += strlen(type_tag);
+    message_len += (4-(message_len%4));
+    return message_len;
 }
 
 void loop(){
@@ -51,25 +45,12 @@ void loop(){
     for (i = 0; i < OSC_LEN; i++) {
         osc_message[i] = 0;
     }
-    build_data();
-    strcpy(osc_message, osc_address);
-    int message_len = strlen(osc_message);
-    message_len += ((message_len%4)+4);
-    strcpy(osc_message+message_len, osc_type_tag);
-    message_len += strlen(osc_type_tag);
-    message_len += ((message_len%4)+4);
-    strcpy(osc_message+message_len, osc_data);
-    message_len += strlen(osc_data);
-    message_len += ((message_len%4)+4);
+    int message_len = prepare_osc_message(osc_message, osc_address, osc_type_tag);
+    osc_message[message_len+3] = (char) data_count;
+    data_count = (data_count + 1) % 128;
+    message_len+=4;
     Serial.print("Message length: ");
-    Serial.print(message_len);
-    Serial.print("Message: ");
-    for (i = 0; i < message_len; i++) {
-        Serial.print(osc_message[i]);
-    }
-    Serial.println("");
-    
-    
+    Serial.println(message_len);
     
   //only send data when connected
   if(connected){
