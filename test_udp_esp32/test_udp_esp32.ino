@@ -25,32 +25,43 @@ void setup(){
 }
 
 #define OSC_LEN 32
-char *osc_address = "nsato/esp";
-char *osc_type_tag = ",i"; //2
-char osc_message[OSC_LEN] = "";
-uint8_t data_count = 0;
-
-int prepare_osc_message(char *mbuf, char *address, char *type_tag) {
-    strncpy(mbuf, address, 16);
-    int message_len = strlen(mbuf);
+// function to build up an osc packet with address and type tag
+int prepare_osc_message(unsigned char *mbuf, char *address, size_t address_size, char *type_tag, size_t type_tag_size) {
+    memcpy(mbuf, address, address_size);
+    int message_len = address_size;
     message_len += (4-(message_len%4));
-    strncpy(mbuf+message_len, type_tag, 4);
-    message_len += strlen(type_tag);
+    memcpy(mbuf+message_len, type_tag, type_tag_size);
+    message_len += type_tag_size;
     message_len += (4-(message_len%4));
     return message_len;
 }
 
-void loop(){
-    int i;
-    for (i = 0; i < OSC_LEN; i++) {
-        osc_message[i] = 0;
+// function to put any 32 bit data type into the data field of an osc message
+int put_osc_data_32(unsigned char *mbuf, size_t size, void *datap) {
+    unsigned data = *((unsigned*)datap);
+    for (int i = 0; i < 4; i++) {
+        mbuf[size+(3-i)] = (unsigned char)((data>>(i*8))&0x000000FF);
     }
-    int message_len = prepare_osc_message(osc_message, osc_address, osc_type_tag);
-    osc_message[message_len+3] = (char) data_count;
-    data_count = (data_count + 1) % 128;
-    message_len+=4;
-    Serial.print("Message length: ");
-    Serial.println(message_len);
+    return size+4;
+}
+
+void print_osc_message(unsigned char *mbuf) {
+    for (int i = 0; i < OSC_LEN; i++) {
+        if (mbuf[i] == 0) {
+            Serial.print(" ");
+        } else { Serial.print((char)mbuf[i]); }
+    } Serial.println();
+}
+
+int osc_data = 0;
+void loop(){
+    char *osc_address = "int";
+    char *osc_type_tag = ",i"; //2
+    unsigned char osc_message[OSC_LEN] = {0};
+    int message_len = prepare_osc_message(osc_message, osc_address, strlen(osc_address), osc_type_tag, strlen(osc_address));
+    message_len = put_osc_data_32(osc_message, message_len,(void*)&osc_data);
+    print_osc_message(osc_message);
+    osc_data = (osc_data+1)%128;
     
   //only send data when connected
   if(connected){
