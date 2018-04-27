@@ -9,7 +9,8 @@
 #endif
 
 void setup() {
-    Serial.begin(115200);
+    //Serial.begin(115200);
+    Serial.begin(9600);
     delay(1000);
     Serial.println("Initializing...");
 }
@@ -58,13 +59,13 @@ void serial_photo_log() {
 }
 
 void serial_pot_midi_data() {
-    Serial.print("PO ");
-    Serial.print(potvalmidi);
+    Serial.print((char)POT_PIN);
+    Serial.print((char)potvalmidi);
     Serial.println();
 }
 void serial_photo_midi_data() {
-    Serial.print("PH ");
-    Serial.print(photovalmidi);
+    Serial.print((char)PHOTO_PIN);
+    Serial.print((char)photovalmidi);
     Serial.println();
 }
 
