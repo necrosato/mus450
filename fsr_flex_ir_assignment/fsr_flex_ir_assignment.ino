@@ -15,8 +15,10 @@
 const int GRAPH_LENGTH = 127; // length of line graph (Max MIDI value)
 
 void setup() {
-    Serial.begin(115200);
-    Serial.print("Setup Finished\n");
+    //Serial.begin(115200);
+    Serial.begin(9600);
+    delay(1000);
+    Serial.println("Initializing...");
 }
 
 int flex = 0, fsr = 0, ir = 0;
@@ -24,18 +26,19 @@ int flex_prev = 0, fsr_prev = 0, ir_prev = 0;
 int flex_midi = 0, fsr_midi = 0, ir_midi = 0;
 int flex_midi_prev = 0, fsr_midi_prev = 0, ir_midi_prev = 0;
 
-void serial_flex_midi_data() {
+void send_flex_data() {
     Serial.print((char)FLEX_PIN);
     Serial.print((char)flex_midi);
     Serial.println();
 }
-void serial_fsr_midi_data() {
+
+void send_fsr_data() {
     Serial.print((char)FSR_PIN);
     Serial.print((char)fsr_midi);
     Serial.println();
 }
 
-void serial_ir_midi_data() {
+void send_ir_data() {
     Serial.print((char)IR_PIN);
     Serial.print((char)ir_midi);
     Serial.println();
@@ -51,13 +54,13 @@ void loop() {
     ir_midi = map(ir, 0, ADC_MAX, 0, GRAPH_LENGTH);
 
     if (flex_midi != flex_midi_prev) {
-        serial_flex_midi_data;
+        send_flex_data();
     }
     if (fsr_midi != fsr_midi_prev) {
-        serial_fsr_midi_data;
+        send_fsr_data();
     }
     if (ir_midi != ir_midi_prev) {
-        serial_ir_midi_data;
+        send_ir_data();
     }
 
     flex_prev = flex;
