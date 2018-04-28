@@ -1,18 +1,28 @@
 //#define ESP32
 
 #ifdef ESP32
-    #define FLEX_PIN = 12
-    #define FSR_PIN = 13
-    #define IR_PIN = 14
+    #define FLEX_PIN 12
+    #define FSR_PIN 13
+    #define IR_PIN 14
     #define ADC_MAX 4095
 #else
-    #define FLEX_PIN = A0
-    #define FSR_PIN = A1
-    #define IR_PIN = A2
+    #define FLEX_PIN A0
+    #define FSR_PIN A1
+    #define IR_PIN A2
     #define ADC_MAX 1023
 #endif
 
 const int GRAPH_LENGTH = 127; // length of line graph (Max MIDI value)
+
+void setup() {
+    Serial.begin(115200);
+    Serial.print("Setup Finished\n");
+}
+
+int flex = 0, fsr = 0, ir = 0;
+int flex_prev = 0, fsr_prev = 0, ir_prev = 0;
+int flex_midi = 0, fsr_midi = 0, ir_midi = 0;
+int flex_midi_prev = 0, fsr_midi_prev = 0, ir_midi_prev = 0;
 
 void serial_flex_midi_data() {
     Serial.print((char)FLEX_PIN);
@@ -30,16 +40,6 @@ void serial_ir_midi_data() {
     Serial.print((char)ir_midi);
     Serial.println();
 }
-
-void setup() {
-    Serial.begin(115200);
-    Serial.print("Setup Finished\n");
-}
-
-int flex = 0, fsr = 0, ir = 0;
-int flex_prev = 0, fsr_prev = 0, ir_prev = 0;
-int flex_midi = 0, fsr_midi = 0, ir_midi = 0;
-int flex_midi_prev = 0, fsr_midi_prev = 0, ir_midi_prev = 0;
 
 void loop() {
     flex = analogRead(FLEX_PIN);
