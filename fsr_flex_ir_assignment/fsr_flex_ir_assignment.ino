@@ -1,8 +1,8 @@
-//#define ESP32
+#define ESP32
 
 #ifdef ESP32
     #define FLEX_PIN 12
-    #define FSR_PIN 13
+    #define FSR_PIN 27
     #define IR_PIN 14
     #define ADC_MAX 4095
 #else
