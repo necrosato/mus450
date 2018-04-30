@@ -52,7 +52,7 @@ function get_chord(n, depth, mode, root, scale) {
     return chord;
 }
 
-console.log(get_chord(1, 5, 1, 60, "major"));
-console.log(get_chord(1, 4, 6, 60, "major"));
-console.log(get_chord(1, 4, 6, 60, "harmonic_minor"));
-console.log(get_chord(1, 8, 1, 60, "major"));
+//console.log(get_chord(1, 5, 1, 60, "major"));
+//console.log(get_chord(1, 4, 6, 60, "major"));
+//console.log(get_chord(1, 4, 6, 60, "harmonic_minor"));
+//console.log(get_chord(1, 8, 1, 60, "major"));
