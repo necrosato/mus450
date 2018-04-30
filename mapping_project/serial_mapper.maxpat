@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 35.0, 79.0, 568.0, 313.0 ],
+		"rect" : [ 766.0, 79.0, 568.0, 313.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -79,8 +79,50 @@
 						"tags" : "",
 						"style" : "",
 						"subpatcher_template" : "",
-						"visible" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"id" : "obj-10",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 429.0, 102.0, 50.0, 22.0 ],
+									"style" : "",
+									"text" : "test me"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-8",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 425.0, 179.0, 50.0, 22.0 ],
+									"style" : ""
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-4",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 417.0, 146.0, 54.0, 22.0 ],
+									"saved_object_attributes" : 									{
+										"filename" : "test.js",
+										"parameter_enable" : 0
+									}
+,
+									"style" : "",
+									"text" : "js test.js"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"id" : "obj-25",
 									"maxclass" : "message",
@@ -246,6 +288,15 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-4", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-10", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-11", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -297,6 +348,15 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-25", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-8", 1 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-4", 0 ]
 								}
 
 							}
@@ -4772,21 +4832,21 @@
 												"filekind" : "audiofile",
 												"loop" : 1,
 												"content_state" : 												{
-													"mode" : [ "basic" ],
-													"originallengthms" : [ 0.0 ],
-													"play" : [ 0 ],
-													"timestretch" : [ 0 ],
-													"quality" : [ "basic" ],
-													"pitchcorrection" : [ 0 ],
 													"originallength" : [ 0.0, "ticks" ],
-													"formantcorrection" : [ 0 ],
-													"formant" : [ 1.0 ],
-													"basictuning" : [ 440 ],
-													"followglobaltempo" : [ 0 ],
-													"speed" : [ 0.614173 ],
 													"slurtime" : [ 0.0 ],
+													"quality" : [ "basic" ],
+													"originallengthms" : [ 0.0 ],
+													"formantcorrection" : [ 0 ],
 													"pitchshift" : [ 1.0 ],
-													"originaltempo" : [ 120.0 ]
+													"mode" : [ "basic" ],
+													"play" : [ 0 ],
+													"formant" : [ 1.0 ],
+													"originaltempo" : [ 120.0 ],
+													"timestretch" : [ 0 ],
+													"basictuning" : [ 440 ],
+													"pitchcorrection" : [ 0 ],
+													"followglobaltempo" : [ 0 ],
+													"speed" : [ 0.614173 ]
 												}
 
 											}
@@ -6189,6 +6249,12 @@
 				"name" : "The Ocean - She was the Universe- Cover.mp3",
 				"bootpath" : "~/Music/iTunes/iTunes Media/Music/Naookie Sato/Covers",
 				"type" : "Mp3 ",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "test.js",
+				"bootpath" : "~/Documents/mus450/mapping_project",
+				"type" : "TEXT",
 				"implicit" : 1
 			}
  ],
