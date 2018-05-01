@@ -58,7 +58,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 34.0, 154.0, 168.5, 22.0 ],
 					"style" : "",
-					"text" : "3 61 major"
+					"text" : "2 60 major"
 				}
 
 			}
@@ -71,7 +71,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 34.0, 226.0, 183.0, 22.0 ],
 					"style" : "",
-					"text" : "get_mode 3 61 major"
+					"text" : "get_mode 2 60 major"
 				}
 
 			}
@@ -97,7 +97,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 551.0, 329.0, 50.0, 22.0 ],
 					"style" : "",
-					"text" : "3"
+					"text" : "1"
 				}
 
 			}
@@ -222,7 +222,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 547.0, 128.0, 50.0, 22.0 ],
 					"style" : "",
-					"text" : "3"
+					"text" : "2"
 				}
 
 			}
@@ -248,7 +248,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 547.0, 63.0, 50.0, 22.0 ],
 					"style" : "",
-					"text" : "61"
+					"text" : "60"
 				}
 
 			}
@@ -390,7 +390,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 234.0, 154.0, 168.5, 22.0 ],
 					"style" : "",
-					"text" : "3 7 3 61 major"
+					"text" : "1 7 2 60 major"
 				}
 
 			}
@@ -403,7 +403,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 234.0, 226.0, 183.0, 22.0 ],
 					"style" : "",
-					"text" : "get_chord 3 7 3 61 major"
+					"text" : "get_chord 1 7 2 60 major"
 				}
 
 			}
@@ -416,7 +416,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 382.0, 519.0, 50.0, 22.0 ],
 					"style" : "",
-					"text" : "78"
+					"text" : "76"
 				}
 
 			}
@@ -429,7 +429,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 517.0, 519.0, 50.0, 22.0 ],
 					"style" : "",
-					"text" : "85"
+					"text" : "83"
 				}
 
 			}
@@ -442,7 +442,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 451.0, 519.0, 50.0, 22.0 ],
 					"style" : "",
-					"text" : "81"
+					"text" : "79"
 				}
 
 			}
@@ -455,7 +455,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 316.0, 519.0, 50.0, 22.0 ],
 					"style" : "",
-					"text" : "74"
+					"text" : "72"
 				}
 
 			}
@@ -468,7 +468,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 245.0, 519.0, 50.0, 22.0 ],
 					"style" : "",
-					"text" : "71"
+					"text" : "69"
 				}
 
 			}
@@ -481,7 +481,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 99.0, 519.0, 50.0, 22.0 ],
 					"style" : "",
-					"text" : "64"
+					"text" : "62"
 				}
 
 			}
@@ -506,7 +506,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 164.0, 519.0, 50.0, 22.0 ],
 					"style" : "",
-					"text" : "68"
+					"text" : "65"
 				}
 
 			}
@@ -545,7 +545,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 234.0, 329.0, 132.0, 22.0 ],
 					"style" : "",
-					"text" : "64 68 71 74 78 81 85"
+					"text" : "62 65 69 72 76 79 83"
 				}
 
 			}
