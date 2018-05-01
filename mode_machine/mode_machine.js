@@ -43,8 +43,9 @@ function get_chord(n, depth, mode, root, scale) {
     // mode: mode number of scale (1 indexed)
     // root: root note of mode
     // scale: key in scales
-	var mode_offset = get_mode_offset(mode+n-1, scale);
-	var chord_scale = get_mode(mode+n-1, root+mode_offset, scale);
+	var root_mode = get_mode(mode, root, scale);
+	var mode_offset = root_mode[(n-1)%7] - root_mode[0];
+	var chord_scale = get_mode(((mode+n-2)%7)+1, root+mode_offset, scale);
 	var chord_mult = Math.floor((n - 1) / 7);
     var chord = [];
 	for (var i = 0; i < depth; i++) {
