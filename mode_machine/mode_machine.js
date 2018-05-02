@@ -7,6 +7,9 @@ function get_mode_offset(n, scale) {
 	var ncount = 0;
     var target = ((n-1) % 7)+1;
     var mult = Math.floor((n-1)/7);
+    if (scale == 'diminished') { 
+        mult = Math.floor((n-1)/4);
+    }
 	for (var i = 0; i < 12; i++) {
 		if (scales[scale][i] == 1) {
 			ncount++;
@@ -44,6 +47,7 @@ function get_chord(n, depth, mode, root, scale) {
     // root: root note of mode
     // scale: key in scales
 	var root_mode = get_mode(mode, root, scale);
+    var mcount = root_mode.length;
 	var mode_offset = root_mode[(n-1)%7] - root_mode[0];
 	var chord_scale = get_mode(((mode+n-2)%7)+1, root+mode_offset, scale);
 	var chord_mult = Math.floor((n - 1) / 7);
