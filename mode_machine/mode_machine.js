@@ -7,7 +7,7 @@ var scales = {'major': 			[1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1],
 
 function get_mode_count(scale) {
     var mode_count = 0;
-    for (var i = 0; i < scale.length; i++) {
+    for (var i = 0; i < scales[scale].length; i++) {
         if (scales[scale][i] == 1) {
             mode_count++;
         }
@@ -18,10 +18,10 @@ function get_mode_count(scale) {
 function get_mode_offset(n, scale) {
 	//function returns the offset into scale (0 indexed) for a given mode n of a scale
 	var ncount = 0;
-    var target = ((n-1) % 7)+1;
     var mode_count = get_mode_count(scale);
+    var target = ((n-1) % mode_count)+1;
     var mult = Math.floor((n-1)/mode_count);
-	for (var i = 0; i < 12; i++) {
+    for (var i = 0; i < scales[scale].length; i++) {
 		if (scales[scale][i] == 1) {
 			ncount++;
 		}
@@ -83,3 +83,8 @@ function get_chord(n, depth, mode, root, scale) {
 //console.log(get_chord(1, 14, 1, 60, 'major'));
 //console.log(get_chord(1, 6, 1, 60, 'augmented'));
 //console.log(get_chord(1, 12, 1, 60, 'augmented'));
+//console.log(get_mode(1, 60, 'major'));
+//console.log(get_chord(1, 7, 1, 60, 'major'));
+//console.log(get_chord(1, 7, 3, 60, 'major'));
+//console.log(get_chord(1, 7, 4, 60, 'major'));
+//console.log(get_chord(1, 7, 5, 60, 'major'));
