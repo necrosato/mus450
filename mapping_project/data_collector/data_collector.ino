@@ -238,6 +238,18 @@ void print_ag_mapped_all() {
     Serial.println();
 }
 
+void print_analogs_mapped_all() {
+    // display tab-separated accel/gyro x/y/z values
+    Serial.print("fsr(0, 1, 2), hotpot, softpot0, softpot1:\t");
+    Serial.print(fsr0_mapped); Serial.print("\t");
+    Serial.print(fsr1_mapped); Serial.print("\t");
+    Serial.print(fsr2_mapped); Serial.print("\t");
+    Serial.print(hotpot_mapped); Serial.print("\t");
+    Serial.print(softpot0_mapped); Serial.print("\t");
+    Serial.print(softpot1_mapped); Serial.print("\t");
+    Serial.println();
+}
+
 void send_channel_data() {
     Serial.print(channel[0]);
     Serial.print(channel[1]);
@@ -399,12 +411,15 @@ void loop() {
 
     // send mapped data
     send_ag_mapped_all();
-    send_analogs_mapped_all();
+    //send_analogs_mapped_all();
+
+    // print mapped data
+    //print_ag_mapped_all();
+    //print_analogs_mapped_all();
 
     delay(50);
     //serial_test_0();
     //serial_test_1();
-    //print_ag_mapped_all();
     //delay(3000);
 }
 
