@@ -1,4 +1,7 @@
 
+#define ESP32MPU
+#define ESP32
+
 // I2Cdev and MPU6050 must be installed as libraries, or else the .cpp/.h files
 // for both classes must be in the include path of your project
 #include "I2Cdev.h"
@@ -9,9 +12,6 @@
 #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
     #include "Wire.h"
 #endif
-
-#define ESP32MPU
-#define ESP32
 
 MPU6050 accelgyro;
 //MPU6050 accelgyro(0x69); // <-- use for AD0 high
@@ -166,6 +166,24 @@ void map_gyro() {
 }
 
 void map_analogs() {
+    if (fsr0_min < fsr0_max) {
+        fsr0_mapped = map(fsr0, fsr0_min, fsr0_max, ANALOG_MIN, ANALOG_MAX);
+    }
+    if (fsr1_min < fsr1_max) {
+        fsr1_mapped = map(fsr1, fsr1_min, fsr1_max, ANALOG_MIN, ANALOG_MAX);
+    }
+    if (fsr2_min < fsr2_max) {
+        fsr2_mapped = map(fsr2, fsr2_min, fsr2_max, ANALOG_MIN, ANALOG_MAX);
+    }
+    if (hotpot_min < hotpot_max) {
+        hotpot_mapped = map(hotpot, hotpot_min, hotpot_max, ANALOG_MIN, ANALOG_MAX);
+    }
+    if (softpot0_min < softpot0_max) {
+        softpot0_mapped = map(softpot0, softpot0_min, softpot0_max, ANALOG_MIN, ANALOG_MAX);
+    }
+    if (softpot1_min < softpot1_max) {
+        softpot1_mapped = map(softpot1, softpot1_min, softpot1_max, ANALOG_MIN, ANALOG_MAX);
+    }
 }
 
 void print_ag_raw_all() {
@@ -219,6 +237,7 @@ void print_ag_mapped_all() {
     Serial.print(gz_max); Serial.print("\t");
     Serial.println();
 }
+
 void send_channel_data() {
     Serial.print(channel[0]);
     Serial.print(channel[1]);
@@ -269,6 +288,27 @@ void send_ag_mapped_all() {
     send_channel_data();
 }
 
+void send_analogs_mapped_all() {
+    set_channel(FSR0_CHANNEL);
+    set_data(fsr0_mapped);
+    send_channel_data();
+    set_channel(FSR1_CHANNEL);
+    set_data(fsr1_mapped);
+    send_channel_data();   
+    set_channel(FSR2_CHANNEL);
+    set_data(fsr2_mapped);
+    send_channel_data();
+    set_channel(HOTPOT_CHANNEL);
+    set_data(hotpot_mapped);
+    send_channel_data();
+    set_channel(SOFTPOT0_CHANNEL);
+    set_data(softpot0_mapped);
+    send_channel_data();
+    set_channel(SOFTPOT1_CHANNEL);
+    set_data(softpot1_mapped);
+    send_channel_data();
+}
+
 void serial_test_0() {
     delay(1000);
     for (int i = 0; i < 40; i++) {
@@ -307,8 +347,7 @@ void serial_test_1() {
     }
     delay(1000);
     for (int i = 0; i < 40; i++) {
-        channel[0] = (char) (i / 10);
-        channel[1] = (char) (i % 10);
+        channel[0] = (char) (i / 10); channel[1] = (char) (i % 10);
         zero_data();
         send_channel_data();
     }
@@ -343,19 +382,29 @@ void loop() {
     accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
     get_min_max_accel();
     get_min_max_gyro();
+    // map accel and gyro
     map_accel();
     map_gyro();
-    //print_ag_raw_all();
-    print_ag_mapped_all();
-    //send_ag_mapped_all();
 
-    //int fsr_val = map(analogRead(A0), 0, 1024, 0, 127);
-    //set_channel(1);
-    //set_data(fsr_val);
-    //send_channel_data();
+    // read raw analog measurements from device
+    fsr0 = analogRead(FSR0_CHANNEL);
+    fsr1 = analogRead(FSR1_CHANNEL);
+    fsr2 = analogRead(FSR2_CHANNEL);
+    hotpot = analogRead(HOTPOT_CHANNEL);
+    softpot0 = analogRead(SOFTPOT0_CHANNEL);
+    softpot1 = analogRead(SOFTPOT1_CHANNEL);
+    get_min_max_analogs();
+    // map analogs
+    map_analogs();
+
+    // send mapped data
+    send_ag_mapped_all();
+    send_analogs_mapped_all();
 
     delay(50);
     //serial_test_0();
     //serial_test_1();
+    //print_ag_mapped_all();
     //delay(3000);
 }
+
