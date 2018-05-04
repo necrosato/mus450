@@ -15,11 +15,52 @@
 
 MPU6050 accelgyro;
 //MPU6050 accelgyro(0x69); // <-- use for AD0 high
+// default sda is 21 and scl is 22 on esp 32
 
 #define MAP_MIN 0
 #define MAP_MAX 127
-int16_t ax = 0, ay = 0, az = 0, axmin = 0, axmax = 0, aymin = 0, aymax = 0, azmin = 0, azmax = 0;
-int16_t gx = 0, gy = 0, gz = 0, gxmin = 0, gxmax = 0, gymin = 0, gymax = 0, gzmin = 0, gzmax = 0;
+#define AG_CONST
+#define AG_MIN -32768
+#define AG_MAX 32767
+#define AX_CHANNEL 2
+#define AY_CHANNEL 3
+#define AZ_CHANNEL 4
+#define GX_CHANNEL 5
+#define GY_CHANNEL 6
+#define GZ_CHANNEL 7
+int16_t ax = 0;
+int16_t ay = 0;
+int16_t az = 0;
+int16_t gx = 0;
+int16_t gy = 0;
+int16_t gz = 0;
+#ifdef AG_CONST
+    int16_t axmin = AG_MIN;
+    int16_t axmax = AG_MAX;
+    int16_t aymin = AG_MIN;
+    int16_t aymax = AG_MAX;
+    int16_t azmin = AG_MIN;
+    int16_t azmax = AG_MAX;
+    int16_t gxmin = AG_MIN;
+    int16_t gxmax = AG_MAX;
+    int16_t gymin = AG_MIN;
+    int16_t gymax = AG_MAX;
+    int16_t gzmin = AG_MIN;
+    int16_t gzmax = AG_MAX;
+#else
+    int16_t axmin = 0;
+    int16_t axmax = 0;
+    int16_t aymin = 0;
+    int16_t aymax = 0;
+    int16_t azmin = 0;
+    int16_t azmax = 0;
+    int16_t gxmin = 0;
+    int16_t gxmax = 0;
+    int16_t gymin = 0;
+    int16_t gymax = 0;
+    int16_t gzmin = 0;
+    int16_t gzmax = 0;
+#endif
 int16_t axmapped = 0;
 int16_t aymapped = 0;
 int16_t azmapped = 0;
@@ -152,6 +193,27 @@ void set_data(int val) {
     data[3] = val % 10;
 }
 
+void send_ag_mapped_all() {
+    set_channel(AX_CHANNEL);
+    set_data(axmapped);
+    send_channel_data();
+    set_channel(AY_CHANNEL);
+    set_data(aymapped);
+    send_channel_data();   
+    set_channel(AZ_CHANNEL);
+    set_data(azmapped);
+    send_channel_data();
+    set_channel(GX_CHANNEL);
+    set_data(gxmapped);
+    send_channel_data();
+    set_channel(GY_CHANNEL);
+    set_data(gymapped);
+    send_channel_data();
+    set_channel(GZ_CHANNEL);
+    set_data(gzmapped);
+    send_channel_data();
+}
+
 void serial_test_0() {
     delay(1000);
     for (int i = 0; i < 40; i++) {
@@ -231,30 +293,14 @@ void loop() {
     //accelgyro.getAcceleration(&ax, &ay, &az);
     //accelgyro.getRotation(&gx, &gy, &gz);
     //print_ag_raw_all();
-    //print_ag_mapped_all();
+    print_ag_mapped_all();
+    //send_ag_mapped_all();
 
     //int fsr_val = map(analogRead(A0), 0, 1024, 0, 127);
     //set_channel(1);
     //set_data(fsr_val);
     //send_channel_data();
-    set_channel(2);
-    set_data(axmapped);
-    send_channel_data();
-    set_channel(3);
-    set_data(aymapped);
-    send_channel_data();   
-    set_channel(4);
-    set_data(azmapped);
-    send_channel_data();
-    set_channel(5);
-    set_data(gxmapped);
-    send_channel_data();
-    set_channel(6);
-    set_data(gymapped);
-    send_channel_data();
-    set_channel(7);
-    set_data(gzmapped);
-    send_channel_data();
+
     delay(50);
     //serial_test_0();
     //serial_test_1();
