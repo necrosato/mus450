@@ -84,8 +84,8 @@ void setup() {
 }
 
 void loop() {
-    //int fsr_val = map(analogRead(A0), 0, 1024, 0, 127);
-    int fsr_val = map(analogRead(A0), 0, 1024, 0, 15);
+    int fsr_val = map(analogRead(A0), 0, 1024, 0, 127);
+    //int fsr_val = map(analogRead(A0), 0, 1024, 0, 15);
     set_channel(A0);
     set_data(fsr_val);
     send_channel_data();
