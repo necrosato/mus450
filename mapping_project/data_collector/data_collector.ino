@@ -74,12 +74,14 @@ int16_t gz_mapped = 0;
 #else
     #define ANALOG_MAX 1023
 #endif
-#define FSR0_CHANNEL 15     // nut fsr
-#define FSR1_CHANNEL 2      // pick fsr
-#define FSR2_CHANNEL 4      // neck fsr
-#define HOTPOT_CHANNEL 5    // HotPot
-#define SOFTPOT0_CHANNEL 18 // SoftPot leads to head
-#define SOFTPOT1_CHANNEL 18 // SoftPot leads to body
+#define BUTTON_CHANNEL 23   // slide switch or pushbutton
+#define FSR0_CHANNEL 13     // nut fsr
+#define FSR1_CHANNEL 12     // pick fsr
+#define FSR2_CHANNEL 14     // neck fsr
+#define HOTPOT_CHANNEL 27   // HotPot
+#define SOFTPOT0_CHANNEL 26 // SoftPot leads to head
+#define SOFTPOT1_CHANNEL 25 // SoftPot leads to body
+int16_t button = LOW;
 int16_t fsr0 = 0;
 int16_t fsr1 = 0;
 int16_t fsr2 = 0;
@@ -300,22 +302,34 @@ void send_ag_mapped_all() {
     send_channel_data();
 }
 
+void send_button() {
+    set_channel(BUTTON_CHANNEL);
+    set_data(button);
+    send_channel_data();
+}
+
 void send_analogs_mapped_all() {
+    // FSR0
     set_channel(FSR0_CHANNEL);
     set_data(fsr0_mapped);
     send_channel_data();
+    // FSR1
     set_channel(FSR1_CHANNEL);
     set_data(fsr1_mapped);
     send_channel_data();   
+    // FSR2
     set_channel(FSR2_CHANNEL);
     set_data(fsr2_mapped);
     send_channel_data();
+    // HOTPOT
     set_channel(HOTPOT_CHANNEL);
     set_data(hotpot_mapped);
     send_channel_data();
+    // SOFTPOT0
     set_channel(SOFTPOT0_CHANNEL);
     set_data(softpot0_mapped);
     send_channel_data();
+    // SOFTPOT1
     set_channel(SOFTPOT1_CHANNEL);
     set_data(softpot1_mapped);
     send_channel_data();
@@ -386,6 +400,7 @@ void setup() {
     Serial.println("Testing device connections...");
     Serial.println(accelgyro.testConnection() ? "MPU6050 connection successful" : "MPU6050 connection failed");
 
+    pinMode(BUTTON_CHANNEL, INPUT);
     delay(1000);
 }
 
@@ -397,6 +412,9 @@ void loop() {
     // map accel and gyro
     map_accel();
     map_gyro();
+
+    // read digital button
+    button = digitalRead(BUTTON_CHANNEL);
 
     // read raw analog measurements from device
     fsr0 = analogRead(FSR0_CHANNEL);
