@@ -32,7 +32,7 @@ function get_mode_offset(n, scale) {
 	return 0;
 }
 
-function get_mode(n, root, scale) {
+function get_mode(n, root, scale, out) {
     // n: mode number (1 indexed)
     // root: root note of mode
     // scale: key in scales
@@ -47,7 +47,9 @@ function get_mode(n, root, scale) {
 			mode.push(new_root+(index<i?12:0)+(mult*12)+index);
 		}
 	}
-	outlet(0, mode);
+	if (out == 1) {
+		outlet(0, mode);
+	}
 	return mode;
 }
 
@@ -57,10 +59,10 @@ function get_chord(n, depth, mode, root, scale) {
     // mode: mode number of scale (1 indexed)
     // root: root note of mode
     // scale: key in scales
-	var root_mode = get_mode(mode, root, scale);
+	var root_mode = get_mode(mode, root, scale, 0);
     var mcount = root_mode.length;
 	var mode_offset = root_mode[(n-1)%mcount] - root_mode[0];
-	var chord_scale = get_mode(((mode+n-2)%mcount)+1, root+mode_offset, scale);
+	var chord_scale = get_mode(((mode+n-2)%mcount)+1, root+mode_offset, scale, 0);
 	var chord_mult = Math.floor((n - 1) / mcount);
     var chord = [];
 	for (var i = 0; i < depth; i++) {
@@ -76,15 +78,8 @@ function get_chord(n, depth, mode, root, scale) {
     return chord;
 }
 
-//console.log(get_mode(1, 60, 'diminished'));
-//console.log(get_chord(1, 4, 1, 60, 'diminished'));
-//console.log(get_chord(1, 8, 1, 60, 'diminished'));
-//console.log(get_chord(1, 7, 1, 60, 'major'));
-//console.log(get_chord(1, 14, 1, 60, 'major'));
-//console.log(get_chord(1, 6, 1, 60, 'augmented'));
-//console.log(get_chord(1, 12, 1, 60, 'augmented'));
-//console.log(get_mode(1, 60, 'major'));
-//console.log(get_chord(1, 7, 1, 60, 'major'));
-//console.log(get_chord(1, 7, 3, 60, 'major'));
-//console.log(get_chord(1, 7, 4, 60, 'major'));
-//console.log(get_chord(1, 7, 5, 60, 'major'));
+function split_list(notes) {
+	for (var i = 0; i < notes.length; i++) {
+		outlet(0, notes[i]);
+	}
+}
