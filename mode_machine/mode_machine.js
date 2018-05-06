@@ -1,3 +1,4 @@
+autowatch=1;
 var scales = {'major': 			[1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1],
 			  'harmonic_minor': [1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1],
 			  'melodic_minor': 	[1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1],
@@ -53,7 +54,7 @@ function get_mode(n, root, scale, out) {
 	return mode;
 }
 
-function get_chord(n, depth, mode, root, scale) {
+function get_chord(n, depth, mode, root, scale, out) {
     // n: chord number in relation to start of mode (1 indexed)
     // depth: depth of chord (1 indexed)
     // mode: mode number of scale (1 indexed)
@@ -74,8 +75,33 @@ function get_chord(n, depth, mode, root, scale) {
         }
         chord.push(chord_scale[index]+(note_mult*12)+(chord_mult*12)); 
 	}
-	outlet(0, chord);
+	if (out == 1) {
+		outlet(0, chord);
+	}
     return chord;
+}
+
+function get_arpeggio(n, depth, mode, root, scale, alen, out) {
+    // n: arpeggio/chord number in relation to start of mode (1 indexed)
+    // depth: depth of pattern)
+    // mode: mode number of scale (1 indexed)
+    // root: root note of mode
+    // scale: key in scales
+    // alen: number of notes in arpeggio
+    // out: output to max (0 or 1)
+    var chord = get_chord(n, depth, mode, root, scale, 0);
+    var mcount = get_mode_count(scale);
+    var arpeggio = [];
+    for (var i = 0; i < alen; i++) {
+        var index = i % chord.length;
+        var note_mult = Math.floor(i/chord.length);
+        note_mult *= 24;
+        arpeggio.push(chord[index]+note_mult);
+    }
+	if (out == 1) {
+		outlet(0, arpeggio);
+	}
+    return arpeggio;
 }
 
 function split_list(notes) {
