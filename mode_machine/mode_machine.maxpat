@@ -43,9 +43,9 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 161.0, 456.0, 186.0, 22.0 ],
+					"patching_rect" : [ 161.0, 456.0, 200.0, 22.0 ],
 					"style" : "",
-					"text" : "get_arpeggio 1 5 1 50 major 11 1"
+					"text" : "get_arpeggio 1 5 1 50 major 11 -1 1"
 				}
 
 			}
@@ -56,9 +56,9 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 161.0, 418.0, 208.0, 22.0 ],
+					"patching_rect" : [ 161.0, 418.0, 222.0, 22.0 ],
 					"style" : "",
-					"text" : "get_arpeggio 1 4 1 50 diminished 8 1"
+					"text" : "get_arpeggio 1 4 1 50 diminished 8 -1 1"
 				}
 
 			}
@@ -134,9 +134,9 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 22.25, 209.0, 235.0, 22.0 ],
+					"patching_rect" : [ 22.25, 209.0, 245.0, 22.0 ],
 					"style" : "",
-					"text" : "get_arpeggio $1 4 1 50 melodic_minor 4 1"
+					"text" : "get_arpeggio $1 4 1 50 melodic_minor 4 1 1"
 				}
 
 			}
@@ -1593,7 +1593,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 204.5, 396.0, 50.0, 22.0 ],
+									"patching_rect" : [ 204.5, 419.0, 50.0, 22.0 ],
 									"style" : ""
 								}
 
@@ -1605,7 +1605,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 204.5, 360.0, 39.0, 22.0 ],
+									"patching_rect" : [ 204.5, 383.0, 39.0, 22.0 ],
 									"style" : "",
 									"text" : "zl.len"
 								}
@@ -1679,14 +1679,13 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-8",
-									"linecount" : 2,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 39.0, 338.0, 132.0, 35.0 ],
+									"patching_rect" : [ 39.0, 338.0, 190.0, 22.0 ],
 									"style" : "",
-									"text" : "50 54 57 61 64 74 78 81 85 88 98"
+									"text" : "50. 40 37 33 30 26 16 13 9 6 2"
 								}
 
 							}

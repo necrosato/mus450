@@ -96,8 +96,8 @@ function get_arpeggio(n, depth, mode, root, scale, alen, direction, out) {
     if (direction < 0) {
         for (var i = 0; i < alen; i++) {
             var index = (depth - (i % depth)) % depth;
-            var note_mult = Math.floor((i-1+depth)/depth);
-            note_mult *= compression * -1;
+            var note_mult = Math.floor((i-1+depth)/depth) * (i>0?-1:0);
+            note_mult *= compression;
             arpeggio.push(chord[index]+note_mult);
         }
     }
