@@ -172,32 +172,6 @@ int16_t softpot1_mapped_prev = 0;
 char channel[2] = {0};
 char data[4] = {0};
 
-void read_accelgyro() {
-    // read raw accel/gyro measurements from device
-    accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
-    get_min_max_accel();
-    get_min_max_gyro();
-    // map accel and gyro
-    map_accel();
-    map_gyro();
-}
-
-void read_sensors() {
-    // read digital button
-    button = digitalRead(BUTTON_CHANNEL);
-
-    // read raw analog measurements from device
-    fsr0 = analogRead(FSR0_CHANNEL);
-    fsr1 = analogRead(FSR1_CHANNEL);
-    fsr2 = analogRead(FSR2_CHANNEL);
-    hotpot = analogRead(HOTPOT_CHANNEL);
-    softpot0 = analogRead(SOFTPOT0_CHANNEL);
-    softpot1 = analogRead(SOFTPOT1_CHANNEL);
-    get_min_max_analogs();
-    // map analogs
-    map_analogs();
-}
-
 void get_min_max_accel() {
     ax_min = min(ax, ax_min);
     ay_min = min(ay, ay_min);
@@ -274,6 +248,32 @@ void map_analogs() {
     if (softpot1_min < softpot1_max) {
         softpot1_mapped = map(softpot1, softpot1_min, softpot1_max, ANALOG_MIN, ANALOG_MAX);
     }
+}
+
+void read_accelgyro() {
+    // read raw accel/gyro measurements from device
+    accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+    get_min_max_accel();
+    get_min_max_gyro();
+    // map accel and gyro
+    map_accel();
+    map_gyro();
+}
+
+void read_sensors() {
+    // read digital button
+    button = digitalRead(BUTTON_CHANNEL);
+
+    // read raw analog measurements from device
+    fsr0 = analogRead(FSR0_CHANNEL);
+    fsr1 = analogRead(FSR1_CHANNEL);
+    fsr2 = analogRead(FSR2_CHANNEL);
+    hotpot = analogRead(HOTPOT_CHANNEL);
+    softpot0 = analogRead(SOFTPOT0_CHANNEL);
+    softpot1 = analogRead(SOFTPOT1_CHANNEL);
+    get_min_max_analogs();
+    // map analogs
+    map_analogs();
 }
 
 void print_ag_raw_all() {
@@ -431,7 +431,7 @@ void send_analogs_mapped_all() {
         send_channel_data();
     }
     fsr0_prev = fsr0;
-    fsr0_prev_mapped = fsr0_mapped;
+    fsr0_mapped_prev = fsr0_mapped;
     // FSR1
     if (fsr1_mapped_prev != fsr1_mapped) {
         set_channel(FSR1_CHANNEL);
@@ -439,7 +439,7 @@ void send_analogs_mapped_all() {
         send_channel_data();   
     }
     fsr1_prev = fsr1;
-    fsr1_prev_mapped = fsr1_mapped;
+    fsr1_mapped_prev = fsr1_mapped;
     // FSR2
     if (fsr2_mapped_prev != fsr2_mapped) {
         set_channel(FSR2_CHANNEL);
@@ -447,7 +447,7 @@ void send_analogs_mapped_all() {
         send_channel_data();
     }
     fsr2_prev = fsr2;
-    fsr2_prev_mapped = fsr2_mapped;   
+    fsr2_mapped_prev = fsr2_mapped;   
     // HOTPOT
     if (hotpot_mapped_prev != hotpot_mapped) {
         set_channel(HOTPOT_CHANNEL);
@@ -469,6 +469,7 @@ void send_analogs_mapped_all() {
         set_channel(SOFTPOT1_CHANNEL);
         set_data(softpot1_mapped);
         send_channel_data();
+    }
     softpot1_prev = softpot1;
     softpot1_mapped_prev = softpot1_mapped;
 }
@@ -558,4 +559,3 @@ void loop() {
     //serial_test_1();
     //delay(3000);
 }
-/
