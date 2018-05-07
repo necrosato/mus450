@@ -83,19 +83,19 @@ function get_chord(n, depth, mode, root, scale, out) {
 
 function get_arpeggio(n, depth, mode, root, scale, alen, out) {
     // n: arpeggio/chord number in relation to start of mode (1 indexed)
-    // depth: depth of pattern)
+    // depth: depth of pattern
     // mode: mode number of scale (1 indexed)
     // root: root note of mode
     // scale: key in scales
     // alen: number of notes in arpeggio
     // out: output to max (0 or 1)
     var chord = get_chord(n, depth, mode, root, scale, 0);
-    var mcount = get_mode_count(scale);
     var arpeggio = [];
+    var compression = ((chord[depth-1] - chord[0]) < 12 ? 12 : 24);
     for (var i = 0; i < alen; i++) {
-        var index = i % chord.length;
-        var note_mult = Math.floor(i/chord.length);
-        note_mult *= 24;
+        var index = i % depth;
+        var note_mult = Math.floor(i/depth);
+        note_mult *= compression;
         arpeggio.push(chord[index]+note_mult);
     }
 	if (out == 1) {

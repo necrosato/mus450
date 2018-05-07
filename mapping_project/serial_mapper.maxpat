@@ -596,7 +596,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 146.0, 201.0, 50.0, 22.0 ],
 									"style" : "",
-									"text" : "14 0"
+									"text" : "25 314"
 								}
 
 							}
@@ -853,7 +853,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 86.0, 131.310059, 50.0, 22.0 ],
 									"style" : "",
-									"text" : "0 0 0 0"
+									"text" : "0 3 1 4"
 								}
 
 							}
@@ -1322,7 +1322,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 567.0, 474.310059, 35.0, 22.0 ],
 									"style" : "",
-									"text" : "39"
+									"text" : "553"
 								}
 
 							}
@@ -1335,7 +1335,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 517.5, 474.310059, 38.0, 22.0 ],
 									"style" : "",
-									"text" : "39"
+									"text" : "260"
 								}
 
 							}
@@ -1398,7 +1398,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 472.0, 474.310059, 35.0, 22.0 ],
 									"style" : "",
-									"text" : "39"
+									"text" : "314"
 								}
 
 							}
@@ -1791,7 +1791,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 919.0, 251.310059, 38.0, 22.0 ],
 									"style" : "",
-									"text" : "0"
+									"text" : "480"
 								}
 
 							}
@@ -1879,7 +1879,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 867.5, 251.310059, 36.5, 22.0 ],
 									"style" : "",
-									"text" : "39"
+									"text" : "379"
 								}
 
 							}
@@ -1892,7 +1892,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 819.0, 251.310059, 35.0, 22.0 ],
 									"style" : "",
-									"text" : "39"
+									"text" : "584"
 								}
 
 							}
@@ -1905,7 +1905,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 769.5, 251.310059, 38.0, 22.0 ],
 									"style" : "",
-									"text" : "39"
+									"text" : "63"
 								}
 
 							}
@@ -1968,7 +1968,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 716.0, 251.310059, 35.0, 22.0 ],
 									"style" : "",
-									"text" : "39"
+									"text" : "63"
 								}
 
 							}
@@ -1981,7 +1981,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 667.0, 251.310059, 38.0, 22.0 ],
 									"style" : "",
-									"text" : "39"
+									"text" : "63"
 								}
 
 							}
@@ -2069,7 +2069,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 615.5, 251.310059, 36.5, 22.0 ],
 									"style" : "",
-									"text" : "39"
+									"text" : "92"
 								}
 
 							}
@@ -2082,7 +2082,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 567.0, 251.310059, 35.0, 22.0 ],
 									"style" : "",
-									"text" : "39"
+									"text" : "63"
 								}
 
 							}
@@ -2095,7 +2095,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 517.5, 251.310059, 38.0, 22.0 ],
 									"style" : "",
-									"text" : "39"
+									"text" : "61"
 								}
 
 							}
@@ -2410,7 +2410,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 13.5, 131.310059, 45.0, 22.0 ],
 									"style" : "",
-									"text" : "1 4"
+									"text" : "2 5"
 								}
 
 							}
@@ -2447,9 +2447,9 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 220.5, 251.310059, 36.5, 22.0 ],
+									"patching_rect" : [ 220.5, 251.310059, 42.5, 22.0 ],
 									"style" : "",
-									"text" : "39"
+									"text" : "35208"
 								}
 
 							}
@@ -4157,7 +4157,7 @@
 									"destination" : [ "obj-28", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 230.0, 237.0, 247.5, 237.0 ],
+									"midpoints" : [ 230.0, 237.0, 253.5, 237.0 ],
 									"order" : 0,
 									"source" : [ "obj-5", 0 ]
 								}
@@ -4753,7 +4753,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 14.0, 149.0, 49.0, 35.0 ],
 									"style" : "",
-									"text" : "speed 0.614173"
+									"text" : "speed 5.968504"
 								}
 
 							}
@@ -4832,21 +4832,21 @@
 												"filekind" : "audiofile",
 												"loop" : 1,
 												"content_state" : 												{
-													"originallength" : [ 0.0, "ticks" ],
-													"slurtime" : [ 0.0 ],
-													"quality" : [ "basic" ],
 													"originallengthms" : [ 0.0 ],
-													"formantcorrection" : [ 0 ],
-													"pitchshift" : [ 1.0 ],
-													"mode" : [ "basic" ],
-													"play" : [ 0 ],
-													"formant" : [ 1.0 ],
 													"originaltempo" : [ 120.0 ],
+													"mode" : [ "basic" ],
+													"formantcorrection" : [ 0 ],
 													"timestretch" : [ 0 ],
+													"pitchshift" : [ 1.0 ],
 													"basictuning" : [ 440 ],
+													"quality" : [ "basic" ],
+													"speed" : [ 5.968504 ],
+													"originallength" : [ 0.0, "ticks" ],
+													"play" : [ 0 ],
 													"pitchcorrection" : [ 0 ],
-													"followglobaltempo" : [ 0 ],
-													"speed" : [ 0.614173 ]
+													"slurtime" : [ 0.0 ],
+													"formant" : [ 1.0 ],
+													"followglobaltempo" : [ 0 ]
 												}
 
 											}
@@ -5606,7 +5606,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 148.0, 225.0, 190.0, 22.0 ],
 									"style" : "",
-									"text" : "1 4 0 0 0 0"
+									"text" : "2 5 0 3 1 4"
 								}
 
 							}
@@ -5795,9 +5795,9 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "int", "" ],
-									"patching_rect" : [ 148.0, 93.689941, 177.0, 22.0 ],
+									"patching_rect" : [ 148.0, 93.689941, 189.0, 22.0 ],
 									"style" : "",
-									"text" : "serial SLAB_USBtoUART 9600"
+									"text" : "serial SLAB_USBtoUART 115200"
 								}
 
 							}
