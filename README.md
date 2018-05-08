@@ -1,7 +1,7 @@
-***Naturally Augmented Guitar***
-***Naookie Sato***
+#Naturally Augmented Guitar
+##Naookie Sato
 
-**Overview**
+###Overview
 
 The augmented guitar is an electric guitar which uses sensors in combination with software processing to modulate sound frequencies. The guitar itself may or may not be used as the initial sonic source. In the latter case it can also function as various controllers, such as a midi controller. I will be creating the Naturally Augmented Guitar.
 
@@ -13,7 +13,7 @@ Taking Enda Bates' guitar as another example, his augmented guitar is not at all
 
 My augmented guitar is going to perform software modulations based entirely on the natural aspects of guitar playing.
 
-**Sensors Used**
+###Sensors Used
 
 A 1.5 in x 1.5 in square force sensitive resistor (FSR) will be attached to the guitar on the back of the neck, below the head and behind the nut. Another 0.5 in diameter circular FSR will be attached to the guitar pick.
 
@@ -23,7 +23,7 @@ A six-axis MPU6050 gyroscope/accelerometer will be attached to the head of the g
 
 A flex sensor will be fitted into a lightweight glove to measure the curvature of the left wrist. This may or may not be implemented depending on how cumbersome the glove is to the playing of the guitar. There is also a possibility that the glove affects the SoftPots.
 
-**Performance Gestures Required**
+###Performance Gestures Required
 
 I want my instrument to focus on augmenting sounds based on natural performance gestures and style of the guitarist playing it. Therefor, there are no special performance gestures required, aside from use of the hardware.
 
@@ -34,11 +34,11 @@ Soft potentiometer strips on the back of the neck will be used to measure positi
 The MPU6050 on the head of the guitar will technically measure the guitar's orientation, not an actual performance gesture. However, some gestures, such as vibrato, can be derived from this data.
 
 
-**Artistic References**
+###Artistic References
 
 Guitar is an instrument I played heavily for about ten years, from ages eight to eighteen. It is the closest musical extension of myself. By creating an instrument which responds naturally to the performance gestures of the performer, I feel that I can use the guitar as a platform to gain a higher level of expressiveness than if I were to augment some other instrument. 
 
-**Sound Outcome**
+###Sound Outcome
 
 The goal of the Naturally Augmented Guitar is simply to generate data in accordance with the natural performance gestures of guitar playing. Thus, there are no strict sound outcomes associated with the instrument.
 
@@ -48,7 +48,7 @@ The FSR on the neck might map to some time/phase effect commonly found with guit
 
 While I could continually map the values of the SoftPots to other effects, I will do something different here. Values coming from the SoftPots will be used to synthesize some sort of accompaniment for the guitar. This will demonstrate how the augmented system can be used as a general controller as well as a signal processor. 
 
-**Links**
+###Links
  
 Square FSR
 
