@@ -4,8 +4,8 @@
 
 // I2Cdev and MPU6050 must be installed as libraries, or else the .cpp/.h files
 // for both classes must be in the include path of your project
-#include "I2Cdev.h"
 #include "MPU6050.h"
+#include "I2Cdev.h"
 
 // Arduino Wire library is required if I2Cdev I2CDEV_ARDUINO_WIRE implementation
 // is used in I2Cdev.h
@@ -231,22 +231,22 @@ void map_gyro() {
 
 void map_analogs() {
     if (fsr0_min < fsr0_max) {
-        fsr0_mapped = map(fsr0, fsr0_min, fsr0_max, ANALOG_MIN, ANALOG_MAX);
+        fsr0_mapped = map(fsr0, fsr0_min, fsr0_max, MAP_MIN, MAP_MAX);
     }
     if (fsr1_min < fsr1_max) {
-        fsr1_mapped = map(fsr1, fsr1_min, fsr1_max, ANALOG_MIN, ANALOG_MAX);
+        fsr1_mapped = map(fsr1, fsr1_min, fsr1_max, MAP_MIN, MAP_MAX);
     }
     if (fsr2_min < fsr2_max) {
-        fsr2_mapped = map(fsr2, fsr2_min, fsr2_max, ANALOG_MIN, ANALOG_MAX);
+        fsr2_mapped = map(fsr2, fsr2_min, fsr2_max, MAP_MIN, MAP_MAX);
     }
     if (hotpot_min < hotpot_max) {
-        hotpot_mapped = map(hotpot, hotpot_min, hotpot_max, ANALOG_MIN, ANALOG_MAX);
+        hotpot_mapped = map(hotpot, hotpot_min, hotpot_max, MAP_MIN, MAP_MAX);
     }
     if (softpot0_min < softpot0_max) {
-        softpot0_mapped = map(softpot0, softpot0_min, softpot0_max, ANALOG_MIN, ANALOG_MAX);
+        softpot0_mapped = map(softpot0, softpot0_min, softpot0_max, MAP_MIN, MAP_MAX);
     }
     if (softpot1_min < softpot1_max) {
-        softpot1_mapped = map(softpot1, softpot1_min, softpot1_max, ANALOG_MIN, ANALOG_MAX);
+        softpot1_mapped = map(softpot1, softpot1_min, softpot1_max, MAP_MIN, MAP_MAX);
     }
 }
 
@@ -260,7 +260,7 @@ void read_accelgyro() {
     map_gyro();
 }
 
-void read_sensors() {
+void read_analog_sensors() {
     // read digital button
     button = digitalRead(BUTTON_CHANNEL);
 
@@ -376,42 +376,42 @@ void send_ag_mapped_all() {
         send_channel_data();
     }
     ax_prev = ax;
-    ax_mapped = ax_mapped;
+    ax_mapped_prev = ax_mapped;
     if (ay_mapped_prev != ay_mapped) {
         set_channel(AY_CHANNEL);
         set_data(ay_mapped);
         send_channel_data();   
     }
     ay_prev = ay;
-    ay_mapped = ay_mapped;
+    ay_mapped_prev = ay_mapped;
     if (az_mapped_prev != az_mapped) {
         set_channel(AZ_CHANNEL);
         set_data(az_mapped);
         send_channel_data();
     }
     az_prev = az;
-    az_mapped = az_mapped;
+    az_mapped_prev = az_mapped;
     if (gx_mapped_prev != gx_mapped) {
         set_channel(GX_CHANNEL);
         set_data(gx_mapped);
         send_channel_data();
     }
     gx_prev = gx;
-    gx_mapped = gx_mapped;
+    gx_mapped_prev = gx_mapped;
     if (gy_mapped_prev != gy_mapped) {
         set_channel(GY_CHANNEL);
         set_data(gy_mapped);
         send_channel_data();
     }
     gy_prev = gy;
-    gy_mapped = gy_mapped;
+    gy_mapped_prev = gy_mapped;
     if (gz_mapped_prev != gz_mapped) {
         set_channel(GZ_CHANNEL);
         set_data(gz_mapped);
         send_channel_data();
     }
     gz_prev = gz;
-    gz_mapped = gz_mapped;
+    gz_mapped_prev = gz_mapped;
 }
 
 void send_button() {
@@ -544,13 +544,16 @@ void setup() {
 }
 
 void loop() {
+
+    read_analog_sensors();
     read_accelgyro();
-    read_sensors();
+
     // send mapped data
-    send_ag_mapped_all();
     send_analogs_mapped_all();
+    send_ag_mapped_all();
 
     // print mapped data
+    //print_ag_raw_all();
     //print_ag_mapped_all();
     //print_analogs_mapped_all();
 

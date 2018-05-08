@@ -8,7 +8,6 @@ Pull up and pull down resistors:
     https://playground.arduino.cc/CommonTopics/PullUpDownResistor
 
 MPU-6050 documentation for Arduino:
-    https://playground.arduino.cc/CommonTopics/PullUpDownResistor
     https://maker.pro/education/imu-interfacing-tutorial-get-started-with-arduino-and-the-mpu-6050-sensor
 
     Issue with my GY-521 from amazon:
