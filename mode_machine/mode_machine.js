@@ -88,12 +88,12 @@ function get_arpeggio(n, depth, mode, root, scale, alen, direction, out) {
     // root: root note of mode
     // scale: key in scales
     // alen: number of notes in arpeggio
-    // direction: -1 for down, 0 for up then down, 1 for up
+    // direction: -2 for down, -1 for down/up, 1 for up/down, 2 for up
     // out: output to max (0 or 1)
     var chord = get_chord(n, depth, mode, root, scale, 0);
     var arpeggio = [];
     var compression = ((chord[depth-1] - chord[0]) < 12 ? 12 : 24);
-    if (direction < 0) {
+    if (direction == -2) {
         for (var i = 0; i < alen; i++) {
             var index = (depth - (i % depth)) % depth;
             var note_mult = Math.floor((i-1+depth)/depth) * (i>0?-1:0);
@@ -101,14 +101,22 @@ function get_arpeggio(n, depth, mode, root, scale, alen, direction, out) {
             arpeggio.push(chord[index]+note_mult);
         }
     }
-    if (direction == 0) {
-        arpeggio = get_arpeggio(n, depth, mode, root, scale, Math.ceil(alen/2), 1, 0);
+    if (direction == -1) {
+    // TODO: Make this work
+        arpeggio = get_arpeggio(n, depth, mode, root, scale, Math.ceil(alen/2), -2, 0);
         var mi = Math.floor(alen/2)-1;
         for (var i = 0; i < Math.floor(alen/2); i++) {
             arpeggio.push(arpeggio[mi-i]);
         }
     }
-    if (direction > 0) {
+    if (direction == 1) {
+        arpeggio = get_arpeggio(n, depth, mode, root, scale, Math.ceil(alen/2), 2, 0);
+        var mi = Math.floor(alen/2)-1;
+        for (var i = 0; i < Math.floor(alen/2); i++) {
+            arpeggio.push(arpeggio[mi-i]);
+        }
+    }
+    if (direction == 2) {
         for (var i = 0; i < alen; i++) {
             var index = i % depth;
             var note_mult = Math.floor(i/depth);
