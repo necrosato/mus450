@@ -549,6 +549,7 @@ void loop() {
     read_accelgyro();
 
     // send mapped data
+    send_button();
     send_analogs_mapped_all();
     send_ag_mapped_all();
 
