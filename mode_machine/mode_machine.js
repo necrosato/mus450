@@ -102,7 +102,6 @@ function get_arpeggio(n, depth, mode, root, scale, alen, direction, out) {
         }
     }
     if (direction == -1) {
-    // TODO: Make this work
         arpeggio = get_arpeggio(n, depth, mode, root, scale, Math.ceil(alen/2), -2, 0);
         var mi = Math.floor(alen/2)-1;
         for (var i = 0; i < Math.floor(alen/2); i++) {
