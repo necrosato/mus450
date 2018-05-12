@@ -17,9 +17,8 @@ MPU6050 accelgyro;
 //MPU6050 accelgyro(0x69); // <-- use for AD0 high
 // default sda is 21 and scl is 22 on esp 32
 
-#define MAP_MIN 0
-#define MAP_MAX 127
-
+#define AG_MAP_MIN 0
+#define AG_MAP_MAX 127
 #define AG_MIN -32768
 #define AG_MAX 32767
 #define AX_CHANNEL 6
@@ -54,6 +53,9 @@ int16_t gx_mapped_prev = 0;
 int16_t gy_mapped_prev = 0;
 int16_t gz_mapped_prev = 0;
 
+#define ANALOG_MAP_MIN 1
+#define ANALOG_MAP_MAX 127
+#define ANALOG_MIN 0
 #define ANALOG_MIN 0
 #ifdef ESP32
     #define ANALOG_MAX 4095
@@ -98,24 +100,24 @@ char channel[2] = {0};
 char data[4] = {0};
 
 void map_accel() {
-    ax_mapped = map(ax, AG_MIN, AG_MAX, MAP_MIN, MAP_MAX);
-    ay_mapped = map(ay, AG_MIN, AG_MAX, MAP_MIN, MAP_MAX);
-    az_mapped = map(az, AG_MIN, AG_MAX, MAP_MIN, MAP_MAX);
+    ax_mapped = map(ax, AG_MIN, AG_MAX, AG_MAP_MIN, AG_MAP_MAX);
+    ay_mapped = map(ay, AG_MIN, AG_MAX, AG_MAP_MIN, AG_MAP_MAX);
+    az_mapped = map(az, AG_MIN, AG_MAX, AG_MAP_MIN, AG_MAP_MAX);
 }
 
 void map_gyro() {
-    gx_mapped = map(gx, AG_MIN, AG_MAX, MAP_MIN, MAP_MAX);
-    gy_mapped = map(gy, AG_MIN, AG_MAX, MAP_MIN, MAP_MAX);
-    gz_mapped = map(gz, AG_MIN, AG_MAX, MAP_MIN, MAP_MAX);
+    gx_mapped = map(gx, AG_MIN, AG_MAX, AG_MAP_MIN, AG_MAP_MAX);
+    gy_mapped = map(gy, AG_MIN, AG_MAX, AG_MAP_MIN, AG_MAP_MAX);
+    gz_mapped = map(gz, AG_MIN, AG_MAX, AG_MAP_MIN, AG_MAP_MAX);
 }
 
 void map_analogs() {
-    fsr0_mapped = map(fsr0, ANALOG_MIN, ANALOG_MAX, MAP_MIN, MAP_MAX);
-    fsr1_mapped = map(fsr1, ANALOG_MIN, ANALOG_MAX, MAP_MIN, MAP_MAX);
-    fsr2_mapped = map(fsr2, ANALOG_MIN, ANALOG_MAX, MAP_MIN, MAP_MAX);
-    hotpot_mapped = map(hotpot, ANALOG_MIN, ANALOG_MAX, MAP_MIN, MAP_MAX);
-    softpot0_mapped = map(softpot0, ANALOG_MIN, ANALOG_MAX, MAP_MIN, MAP_MAX);
-    softpot1_mapped = map(softpot1, ANALOG_MIN, ANALOG_MAX, MAP_MIN, MAP_MAX);
+    fsr0_mapped = fsr0 == 0 ? 0 : map(fsr0, ANALOG_MIN, ANALOG_MAX, ANALOG_MAP_MIN, ANALOG_MAP_MAX);
+    fsr1_mapped = fsr1 == 0 ? 0 : map(fsr1, ANALOG_MIN, ANALOG_MAX, ANALOG_MAP_MIN, ANALOG_MAP_MAX);
+    fsr2_mapped = fsr2 == 0 ? 0 : map(fsr2, ANALOG_MIN, ANALOG_MAX, ANALOG_MAP_MIN, ANALOG_MAP_MAX);
+    hotpot_mapped = hotpot == 0 ? 0 : map(hotpot, ANALOG_MIN, ANALOG_MAX, ANALOG_MAP_MIN, ANALOG_MAP_MAX);
+    softpot0_mapped = softpot0 == 0 ? 0 : map(softpot0, ANALOG_MIN, ANALOG_MAX, ANALOG_MAP_MIN, ANALOG_MAP_MAX);
+    softpot1_mapped = softpot1 == 0 ? 0 : map(softpot1, ANALOG_MIN, ANALOG_MAX, ANALOG_MAP_MIN, ANALOG_MAP_MAX);
 }
 
 void read_accelgyro() {
