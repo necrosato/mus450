@@ -54,8 +54,9 @@ int16_t gy_mapped_prev = 0;
 int16_t gz_mapped_prev = 0;
 
 #define ANALOG_MAP_MIN 1
-#define ANALOG_MAP_MAX 127
-#define ANALOG_MIN 0
+#define ANALOG_MAP_MAX_0 127
+#define ANALOG_MAP_MAX_1 8
+#define ANALOG_MAP_MAX_2 13
 #define ANALOG_MIN 0
 #ifdef ESP32
     #define ANALOG_MAX 4095
@@ -112,12 +113,12 @@ void map_gyro() {
 }
 
 void map_analogs() {
-    fsr0_mapped = fsr0 == 0 ? 0 : map(fsr0, ANALOG_MIN, ANALOG_MAX, ANALOG_MAP_MIN, ANALOG_MAP_MAX);
-    fsr1_mapped = fsr1 == 0 ? 0 : map(fsr1, ANALOG_MIN, ANALOG_MAX, ANALOG_MAP_MIN, ANALOG_MAP_MAX);
-    fsr2_mapped = fsr2 == 0 ? 0 : map(fsr2, ANALOG_MIN, ANALOG_MAX, ANALOG_MAP_MIN, ANALOG_MAP_MAX);
-    hotpot_mapped = hotpot == 0 ? 0 : map(hotpot, ANALOG_MIN, ANALOG_MAX, ANALOG_MAP_MIN, ANALOG_MAP_MAX);
-    softpot0_mapped = softpot0 == 0 ? 0 : map(softpot0, ANALOG_MIN, ANALOG_MAX, ANALOG_MAP_MIN, ANALOG_MAP_MAX);
-    softpot1_mapped = softpot1 == 0 ? 0 : map(softpot1, ANALOG_MIN, ANALOG_MAX, ANALOG_MAP_MIN, ANALOG_MAP_MAX);
+    fsr0_mapped = fsr0 == 0 ? 0 : map(fsr0, ANALOG_MIN, ANALOG_MAX, ANALOG_MAP_MIN, ANALOG_MAP_MAX_0);
+    fsr1_mapped = fsr1 == 0 ? 0 : map(fsr1, ANALOG_MIN, ANALOG_MAX, ANALOG_MAP_MIN, ANALOG_MAP_MAX_0);
+    fsr2_mapped = fsr2 == 0 ? 0 : map(fsr2, ANALOG_MIN, ANALOG_MAX, ANALOG_MAP_MIN, ANALOG_MAP_MAX_0);
+    hotpot_mapped = hotpot == 0 ? 0 : map(hotpot, ANALOG_MIN, ANALOG_MAX, ANALOG_MAP_MIN, ANALOG_MAP_MAX_2);
+    softpot0_mapped = softpot0 == 0 ? 0 : map(softpot0, ANALOG_MIN, ANALOG_MAX, ANALOG_MAP_MIN, ANALOG_MAP_MAX_1);
+    softpot1_mapped = softpot1 == 0 ? 0 : map(softpot1, ANALOG_MIN, ANALOG_MAX, ANALOG_MAP_MIN, ANALOG_MAP_MAX_1);
 }
 
 void read_accelgyro() {
