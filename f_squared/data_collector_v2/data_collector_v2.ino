@@ -265,9 +265,11 @@ void send_button() {
 
 void send_analogs_mapped_all() {
     // FSR0
-    if (fsr0_mapped_prev != fsr0_mapped) {
+    //if (fsr0_mapped_prev != fsr0_mapped) {
+    if (fsr0_prev != fsr0) {
         set_channel(FSR0_CHANNEL);
-        set_data(fsr0_mapped);
+        //set_data(fsr0_mapped);
+        set_data(fsr0);
         send_channel_data();
     }
     fsr0_prev = fsr0;
@@ -290,8 +292,10 @@ void send_analogs_mapped_all() {
     fsr2_mapped_prev = fsr2_mapped;   
     // HOTPOT
     if (hotpot_mapped_prev != hotpot_mapped) {
+    //if (hotpot_prev != hotpot) {
         set_channel(HOTPOT_CHANNEL);
         set_data(hotpot_mapped);
+        //set_data(hotpot);
         send_channel_data();
     }
     hotpot_prev = hotpot;
