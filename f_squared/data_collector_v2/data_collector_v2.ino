@@ -263,6 +263,57 @@ void send_button() {
     button_prev = button;
 }
 
+void send_analogs_raw_all() {
+    // FSR0
+    if (fsr0_prev != fsr0) {
+        set_channel(FSR0_CHANNEL);
+        set_data(fsr0);
+        send_channel_data();
+    }
+    fsr0_prev = fsr0;
+    fsr0_mapped_prev = fsr0_mapped;
+    // FSR1
+    if (fsr1_prev != fsr1) {
+        set_channel(FSR1_CHANNEL);
+        set_data(fsr1);
+        send_channel_data();   
+    }
+    fsr1_prev = fsr1;
+    fsr1_mapped_prev = fsr1_mapped;
+    // FSR2
+    if (fsr2_prev != fsr2) {
+        set_channel(FSR2_CHANNEL);
+        set_data(fsr2);
+        send_channel_data();
+    }
+    fsr2_prev = fsr2;
+    fsr2_mapped_prev = fsr2_mapped;   
+    // HOTPOT
+    if (hotpot_prev != hotpot) {
+        set_channel(HOTPOT_CHANNEL);
+        set_data(hotpot);
+        send_channel_data();
+    }
+    hotpot_prev = hotpot;
+    hotpot_mapped_prev = hotpot_mapped;
+    // SOFTPOT0
+    if (softpot0_prev != softpot0) {
+        set_channel(SOFTPOT0_CHANNEL);
+        set_data(softpot0);
+        send_channel_data();
+    }
+    softpot0_prev = softpot0;
+    softpot0_mapped_prev = softpot0_mapped;
+    // SOFTPOT1
+    if (softpot1_prev != softpot1) {
+        set_channel(SOFTPOT1_CHANNEL);
+        set_data(softpot1);
+        send_channel_data();
+    }
+    softpot1_prev = softpot1;
+    softpot1_mapped_prev = softpot1_mapped;
+}
+
 void send_analogs_mapped_all() {
     // FSR0
     //if (fsr0_mapped_prev != fsr0_mapped) {
@@ -348,9 +399,10 @@ void loop() {
     read_analog_sensors();
     read_accelgyro();
 
-    // send mapped data
+    // send data
     send_button();
-    send_analogs_mapped_all();
+    //send_analogs_mapped_all();
+    send_analogs_raw_all();
     send_ag_mapped_all();
 
     delay(50);
